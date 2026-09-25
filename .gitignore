@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+# raw imagery cache from fetch_real_data.py (only derived stats are committed)
+data/cache/

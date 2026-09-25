@@ -1,0 +1,251 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "RJ-JAIPUR-01",
+        "name": "Chaksu farmland, south of Jaipur",
+        "state": "Rajasthan",
+        "centroid": [
+          75.93,
+          26.62
+        ],
+        "description": "semi-arid rainfed/irrigated farmland",
+        "size_km": 5.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              75.90488,
+              26.59754
+            ],
+            [
+              75.95512,
+              26.59754
+            ],
+            [
+              75.95512,
+              26.64246
+            ],
+            [
+              75.90488,
+              26.64246
+            ],
+            [
+              75.90488,
+              26.59754
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "KL-KUTTANAD-01",
+        "name": "Kuttanad paddy polders (Champakulam area)",
+        "state": "Kerala",
+        "centroid": [
+          76.42,
+          9.43
+        ],
+        "description": "below-sea-level paddy, flood-prone",
+        "size_km": 5.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.39723,
+              9.40754
+            ],
+            [
+              76.44277,
+              9.40754
+            ],
+            [
+              76.44277,
+              9.45246
+            ],
+            [
+              76.39723,
+              9.45246
+            ],
+            [
+              76.39723,
+              9.40754
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "AS-MAJULI-01",
+        "name": "Majuli island (Garamur area)",
+        "state": "Assam",
+        "centroid": [
+          94.18,
+          26.95
+        ],
+        "description": "Brahmaputra river island, annual floods",
+        "size_km": 5.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              94.15481,
+              26.92754
+            ],
+            [
+              94.20519,
+              26.92754
+            ],
+            [
+              94.20519,
+              26.97246
+            ],
+            [
+              94.15481,
+              26.97246
+            ],
+            [
+              94.15481,
+              26.92754
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "TN-CHENNAI-01",
+        "name": "Mudichur / Tambaram outskirts",
+        "state": "Tamil Nadu",
+        "centroid": [
+          80.09,
+          12.92
+        ],
+        "description": "peri-urban Adyar floodplain",
+        "size_km": 5.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              80.06696,
+              12.89754
+            ],
+            [
+              80.11304,
+              12.89754
+            ],
+            [
+              80.11304,
+              12.94246
+            ],
+            [
+              80.06696,
+              12.94246
+            ],
+            [
+              80.06696,
+              12.89754
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PB-LUDHIANA-01",
+        "name": "Farmland south-west of Ludhiana",
+        "state": "Punjab",
+        "centroid": [
+          75.72,
+          30.8
+        ],
+        "description": "intensive rice-wheat (kharif/rabi)",
+        "size_km": 5.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              75.69385,
+              30.77754
+            ],
+            [
+              75.74615,
+              30.77754
+            ],
+            [
+              75.74615,
+              30.82246
+            ],
+            [
+              75.69385,
+              30.82246
+            ],
+            [
+              75.69385,
+              30.77754
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "OD-PURI-01",
+        "name": "Inland coastal plain north of Puri",
+        "state": "Odisha",
+        "centroid": [
+          85.8,
+          19.95
+        ],
+        "description": "cyclone-exposed coastal-plain farmland (inland, no sea)",
+        "size_km": 5.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.77611,
+              19.92754
+            ],
+            [
+              85.82389,
+              19.92754
+            ],
+            [
+              85.82389,
+              19.97246
+            ],
+            [
+              85.77611,
+              19.97246
+            ],
+            [
+              85.77611,
+              19.92754
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
