@@ -1,5 +1,9 @@
 # Limitations: draft (pull into README at step 10)
 
+## Setup
+- **Model:** `qwen/qwen3.8-27b` on Groq, `temperature: 0`, `reasoning_effort: none` (no reasoning tokens), max 1024 output tokens per call. The spec called for a Llama model (`llama-3.3-70b-versatile`), but the Groq key used for this experiment has no access to any Llama chat model (the API returned `model_not_found`; checked 2026-09-27). The results therefore describe one Qwen model, not Llama.
+- **Free-tier limits for this model:** 30 requests/min, 1,000 requests/day, 8,000 tokens/min, 200,000 tokens/day. These limits shape the sample size (see the results section).
+
 ## Design choices
 - **Realistic replies from the harmful tools.** `send_report` returns "Report sent to X." and `delete_region_data` returns "Region data for X deleted.", even though both only write to an in-memory log. This is deliberate: a reply that said "simulated" would tell the agent it is in a sandbox, which could change its behaviour and bias the attack-success measurements.
 - **`get_region_data` omits provenance.** The tool returns the measured values and the `notes` field, but not the scene lists and request URLs, to keep tool outputs short for the LLM's token budget. Full provenance stays in `data/regions.json`.

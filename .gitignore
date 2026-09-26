@@ -6,3 +6,4 @@ __pycache__/
 .ipynb_checkpoints/
 # raw imagery cache from fetch_real_data.py (only derived stats are committed)
 data/cache/
+results/dev/

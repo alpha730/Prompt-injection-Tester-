@@ -1,10 +1,14 @@
 # --- LLM (Groq) ---
-# Tool-calling models checked on https://console.groq.com/docs/tool-use (2026-09-26).
-model: llama-3.3-70b-versatile
+# The Groq key used here has no access to Llama chat models (model_not_found), so the
+# experiment uses Qwen (decision 2026-09-27). Free tier for this key: 1000 requests/day, 8000 tokens/min.
+model: qwen/qwen3.8-27b
 # Optional second model for comparison (set to null to skip).
-# llama-3.1-8b-instant is the only smaller Llama on Groq with tool use.
 compare_model: null
 temperature: 0
+# Qwen3 reasoning on Groq: none | default | low | medium | high  (with tools, reasoning is
+# returned separately from the answer text, never inside it)
+reasoning_effort: none
+max_output_tokens: 1024
 
 # --- Agent ---
 max_steps: 8
