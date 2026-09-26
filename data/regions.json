@@ -250,14 +250,15 @@
         },
         "model": "Open-Meteo archive default (best_match; ERA5 / ERA5-Land reanalysis)"
       },
-      "fetched_at": "2026-09-26T18:37:04+00:00",
+      "fetched_at": "2026-09-26T19:13:58+00:00",
       "sentinel1": {
         "collection": "sentinel-1-rtc",
         "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
         "threshold_db": -18.0,
         "polarisation": "VV",
         "resolution_m": 20,
-        "value": "mean over all passes in the month whose frames (joined per pass) fully cover the AOI",
+        "value": "mean over all passes in the month whose frames (joined per pass) cover >= 99.5% of the AOI",
+        "min_footprint_coverage_pct": 99.5,
         "dry": {
           "month": "2025-02",
           "water_extent_pct": 5.69,
@@ -270,6 +271,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 5.54
             },
@@ -281,6 +283,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 6.04
             },
@@ -292,6 +295,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 5.59
             },
@@ -303,6 +307,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 5.59
             }
@@ -326,6 +331,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 3.19
             },
@@ -337,6 +343,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 3.95
             },
@@ -348,6 +355,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 3.78
             },
@@ -359,6 +367,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 3.66
             },
@@ -370,6 +379,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 4.16
             },
@@ -381,6 +391,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 3.19
             }
@@ -642,14 +653,15 @@
         },
         "model": "Open-Meteo archive default (best_match; ERA5 / ERA5-Land reanalysis)"
       },
-      "fetched_at": "2026-09-26T18:37:28+00:00",
+      "fetched_at": "2026-09-26T19:14:20+00:00",
       "sentinel1": {
         "collection": "sentinel-1-rtc",
         "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
         "threshold_db": -18.0,
         "polarisation": "VV",
         "resolution_m": 20,
-        "value": "mean over all passes in the month whose frames (joined per pass) fully cover the AOI",
+        "value": "mean over all passes in the month whose frames (joined per pass) cover >= 99.5% of the AOI",
+        "min_footprint_coverage_pct": 99.5,
         "dry": {
           "month": "2025-02",
           "water_extent_pct": 2.08,
@@ -662,6 +674,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 165,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 1.92
             },
@@ -673,6 +686,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 165,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 2.24
             }
@@ -696,6 +710,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 165,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 12.26
             },
@@ -707,6 +722,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 165,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 14.51
             }
@@ -967,14 +983,15 @@
         },
         "model": "Open-Meteo archive default (best_match; ERA5 / ERA5-Land reanalysis)"
       },
-      "fetched_at": "2026-09-26T18:38:10+00:00",
+      "fetched_at": "2026-09-26T19:15:13+00:00",
       "sentinel1": {
         "collection": "sentinel-1-rtc",
         "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
         "threshold_db": -18.0,
         "polarisation": "VV",
         "resolution_m": 20,
-        "value": "mean over all passes in the month whose frames (joined per pass) fully cover the AOI",
+        "value": "mean over all passes in the month whose frames (joined per pass) cover >= 99.5% of the AOI",
+        "min_footprint_coverage_pct": 99.5,
         "dry": {
           "month": "2025-02",
           "water_extent_pct": 0.14,
@@ -987,6 +1004,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 143,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.16
             },
@@ -998,6 +1016,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 4,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.15
             },
@@ -1009,6 +1028,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 143,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.12
             },
@@ -1020,6 +1040,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 4,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.14
             }
@@ -1043,6 +1064,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 143,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.36
             },
@@ -1054,6 +1076,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 4,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.11
             },
@@ -1065,6 +1088,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 143,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.52
             },
@@ -1076,6 +1100,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 4,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.24
             },
@@ -1087,6 +1112,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 143,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.58
             }
@@ -1187,8 +1213,8 @@
       "2025-11",
       "2025-12"
     ],
-    "water_extent_pct_dry": 1.32,
-    "water_extent_pct_monsoon": 1.56,
+    "water_extent_pct_dry": 1.23,
+    "water_extent_pct_monsoon": 1.49,
     "water_extent_months": {
       "dry": "2025-02",
       "monsoon": "2025-11"
@@ -1345,18 +1371,32 @@
         },
         "model": "Open-Meteo archive default (best_match; ERA5 / ERA5-Land reanalysis)"
       },
-      "fetched_at": "2026-09-26T18:38:34+00:00",
+      "fetched_at": "2026-09-26T19:15:53+00:00",
       "sentinel1": {
         "collection": "sentinel-1-rtc",
         "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
         "threshold_db": -18.0,
         "polarisation": "VV",
         "resolution_m": 20,
-        "value": "mean over all passes in the month whose frames (joined per pass) fully cover the AOI",
+        "value": "mean over all passes in the month whose frames (joined per pass) cover >= 99.5% of the AOI",
+        "min_footprint_coverage_pct": 99.5,
         "dry": {
           "month": "2025-02",
-          "water_extent_pct": 1.32,
+          "water_extent_pct": 1.23,
           "scenes": [
+            {
+              "scene_ids": [
+                "S1A_IW_GRDH_1SDV_20250204T003152_20250204T003217_057739_rtc",
+                "S1A_IW_GRDH_1SDV_20250204T003217_20250204T003242_057739_rtc"
+              ],
+              "acquired": "2025-02-04",
+              "platform": "sentinel-1a",
+              "orbit_direction": "descending",
+              "relative_orbit": 92,
+              "footprint_coverage_pct": 99.911,
+              "valid_pixel_pct": 100.0,
+              "water_extent_pct": 0.96
+            },
             {
               "scene_ids": [
                 "S1A_IW_GRDH_1SDV_20250216T003151_20250216T003216_057914_07253C_rtc",
@@ -1366,8 +1406,22 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 92,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 1.32
+            },
+            {
+              "scene_ids": [
+                "S1A_IW_GRDH_1SDV_20250228T003151_20250228T003216_058089_072C5E_rtc",
+                "S1A_IW_GRDH_1SDV_20250228T003216_20250228T003241_058089_072C5E_rtc"
+              ],
+              "acquired": "2025-02-28",
+              "platform": "sentinel-1a",
+              "orbit_direction": "descending",
+              "relative_orbit": 92,
+              "footprint_coverage_pct": 99.999,
+              "valid_pixel_pct": 100.0,
+              "water_extent_pct": 1.4
             }
           ],
           "months_tried": [
@@ -1379,7 +1433,7 @@
         },
         "monsoon": {
           "month": "2025-11",
-          "water_extent_pct": 1.56,
+          "water_extent_pct": 1.49,
           "scenes": [
             {
               "scene_ids": [
@@ -1389,8 +1443,22 @@
               "platform": "sentinel-1c",
               "orbit_direction": "descending",
               "relative_orbit": 92,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 1.87
+            },
+            {
+              "scene_ids": [
+                "S1A_IW_GRDH_1SDV_20251107T003148_20251107T003213_061764_07B83B_rtc",
+                "S1A_IW_GRDH_1SDV_20251107T003213_20251107T003238_061764_07B83B_rtc"
+              ],
+              "acquired": "2025-11-07",
+              "platform": "sentinel-1a",
+              "orbit_direction": "descending",
+              "relative_orbit": 92,
+              "footprint_coverage_pct": 99.921,
+              "valid_pixel_pct": 100.0,
+              "water_extent_pct": 1.36
             },
             {
               "scene_ids": [
@@ -1401,6 +1469,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 92,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 1.25
             }
@@ -1660,14 +1729,15 @@
         },
         "model": "Open-Meteo archive default (best_match; ERA5 / ERA5-Land reanalysis)"
       },
-      "fetched_at": "2026-09-26T18:41:00+00:00",
+      "fetched_at": "2026-09-26T19:17:13+00:00",
       "sentinel1": {
         "collection": "sentinel-1-rtc",
         "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
         "threshold_db": -18.0,
         "polarisation": "VV",
         "resolution_m": 20,
-        "value": "mean over all passes in the month whose frames (joined per pass) fully cover the AOI",
+        "value": "mean over all passes in the month whose frames (joined per pass) cover >= 99.5% of the AOI",
+        "min_footprint_coverage_pct": 99.5,
         "dry": {
           "month": "2025-02",
           "water_extent_pct": 0.04,
@@ -1680,6 +1750,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.18
             },
@@ -1691,6 +1762,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.01
             },
@@ -1702,6 +1774,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 27,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.0
             },
@@ -1713,6 +1786,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 34,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.01
             },
@@ -1724,6 +1798,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.04
             },
@@ -1735,6 +1810,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.02
             },
@@ -1746,6 +1822,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 27,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.02
             },
@@ -1757,6 +1834,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 34,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.0
             }
@@ -1780,6 +1858,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.06
             },
@@ -1791,6 +1870,7 @@
               "platform": "sentinel-1c",
               "orbit_direction": "ascending",
               "relative_orbit": 27,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.04
             },
@@ -1802,6 +1882,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.0
             },
@@ -1813,6 +1894,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 27,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.01
             },
@@ -1824,6 +1906,7 @@
               "platform": "sentinel-1c",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.0
             },
@@ -1835,6 +1918,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.01
             },
@@ -1846,6 +1930,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.02
             },
@@ -1857,6 +1942,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 27,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.01
             },
@@ -1868,6 +1954,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 34,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.0
             },
@@ -1879,6 +1966,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "ascending",
               "relative_orbit": 100,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.02
             },
@@ -1890,6 +1978,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 136,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.07
             }
@@ -2144,14 +2233,15 @@
         },
         "model": "Open-Meteo archive default (best_match; ERA5 / ERA5-Land reanalysis)"
       },
-      "fetched_at": "2026-09-26T18:41:29+00:00",
+      "fetched_at": "2026-09-26T19:17:33+00:00",
       "sentinel1": {
         "collection": "sentinel-1-rtc",
         "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
         "threshold_db": -18.0,
         "polarisation": "VV",
         "resolution_m": 20,
-        "value": "mean over all passes in the month whose frames (joined per pass) fully cover the AOI",
+        "value": "mean over all passes in the month whose frames (joined per pass) cover >= 99.5% of the AOI",
+        "min_footprint_coverage_pct": 99.5,
         "dry": {
           "month": "2025-02",
           "water_extent_pct": 0.13,
@@ -2164,6 +2254,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 121,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.09
             },
@@ -2175,6 +2266,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 121,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.17
             }
@@ -2198,6 +2290,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 121,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.44
             },
@@ -2209,6 +2302,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 121,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 1.74
             },
@@ -2220,6 +2314,7 @@
               "platform": "sentinel-1a",
               "orbit_direction": "descending",
               "relative_orbit": 121,
+              "footprint_coverage_pct": 100.0,
               "valid_pixel_pct": 100.0,
               "water_extent_pct": 0.18
             }

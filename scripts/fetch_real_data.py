@@ -56,6 +56,8 @@ DRY_WATER_WARN_PCT = 20.0
 # Sentinel-1
 S1_RESOLUTION_M = 20
 S1_WATER_DB = -18.0
+# Footprint outlines are simplified polygons, so a pass counts as covering the AOI at >= 99.5%.
+S1_MIN_COVERAGE_PCT = 99.5
 # Dry month: Feb; if no RTC pass fully covers the AOI, fall back to Mar, then Jan (all regions).
 S1_DRY_MONTHS = [f"{YEAR}-02", f"{YEAR}-03", f"{YEAR}-01"]
 S1_MONSOON_MONTH = {"default": f"{YEAR}-08", "TN-CHENNAI-01": f"{YEAR}-11"}  # NE monsoon for Chennai
@@ -193,19 +195,22 @@ def s1_month(catalog, region, month):
     bbox = region["bbox"]
     aoi = box(*bbox)
     # Group adjacent frames of the same pass (same date, platform, orbit direction, relative orbit);
-    # a pass is used only if the union of its frames fully covers the AOI.
+    # a pass is used only if the union of its frames covers >= S1_MIN_COVERAGE_PCT of the AOI.
     passes = {}
     for it in catalog.search(collections=["sentinel-1-rtc"], bbox=bbox, datetime=month_range(month)).items():
         p = it.properties
         key = (p["datetime"][:10], (p.get("platform") or "").lower(), p.get("sat:orbit_state"), p.get("sat:relative_orbit"))
         passes.setdefault(key, []).append(it)
-    covering = [(k, its) for k, its in passes.items()
-                if unary_union([shape(it.geometry) for it in its]).contains(aoi)]
+    def coverage_pct(its):
+        return 100.0 * unary_union([shape(it.geometry) for it in its]).intersection(aoi).area / aoi.area
+    covering = [(k, its, coverage_pct(its)) for k, its in passes.items()]
+    covering = [c for c in covering if c[2] >= S1_MIN_COVERAGE_PCT]
     if not covering:
         return {"water_extent_pct": None, "month": month,
-                "reason": "no Sentinel-1 RTC pass (frames of one pass joined) fully covering AOI"}
+                "reason": f"no Sentinel-1 RTC pass (frames of one pass joined) covering >= "
+                          f"{S1_MIN_COVERAGE_PCT}% of AOI"}
     scenes = []
-    for (date, platform, orbit_state, rel_orbit), its in sorted(covering, key=lambda c: c[0]):
+    for (date, platform, orbit_state, rel_orbit), its, cov in sorted(covering, key=lambda c: c[0]):
         its = [planetary_computer.sign(it) for it in its]
         vv = stac_load(its, bands=["vv"], bbox=bbox, crs=epsg_of(its[0]), groupby="solar_day",
                        resolution=S1_RESOLUTION_M, resampling="average").isel(time=0)["vv"].values
@@ -220,6 +225,7 @@ def s1_month(catalog, region, month):
             "platform": platform,
             "orbit_direction": orbit_state,
             "relative_orbit": rel_orbit,
+            "footprint_coverage_pct": round(cov, 3),
             "valid_pixel_pct": round(100.0 * ok.sum() / vv.size, 1),
             "water_extent_pct": round(100.0 * float((db < S1_WATER_DB).mean()), 2),
         })
@@ -344,7 +350,8 @@ def fetch_region(catalog, region, skip_s1):
         rec["provenance"]["sentinel1"] = {
             "collection": "sentinel-1-rtc", "stac_api": STAC_URL, "threshold_db": S1_WATER_DB,
             "polarisation": "VV", "resolution_m": S1_RESOLUTION_M,
-            "value": "mean over all passes in the month whose frames (joined per pass) fully cover the AOI", **s1,
+            "value": "mean over all passes in the month whose frames (joined per pass) cover >= 99.5% of the AOI",
+            "min_footprint_coverage_pct": S1_MIN_COVERAGE_PCT, **s1,
         }
     rec["notes"] = ""
     return rec

@@ -45,9 +45,9 @@ The benign tasks only ask about non-null months.
 
 - **Access:** Microsoft Planetary Computer STAC API, collection `sentinel-1-rtc` (radiometrically terrain-corrected backscatter; RTC processing by Catalyst). No account needed.
 - **Method:** % of valid AOI pixels with VV backscatter < −18 dB, loaded at 20 m. This single threshold is a rough, commonly used open-water heuristic. It misses water under vegetation and can misclassify smooth dry soil as water (see the README limitations).
-- **Passes:** adjacent frames from the same pass (same date, platform, orbit direction and relative orbit) are joined. A pass is used only if the joined frames fully cover the AOI; partially covering passes are not used. The monthly value is the mean over all such passes. Scene IDs, orbit direction and relative orbit for each pass are stored under `provenance.sentinel1`.
+- **Passes:** adjacent frames from the same pass (same date, platform, orbit direction and relative orbit) are joined. A pass is used only if its joined frame footprints cover at least 99.5% of the AOI. The small tolerance allows for footprint outlines being simplified polygons; passes with less coverage are not used. The monthly value is the mean over all such passes. Scene IDs, orbit direction, relative orbit and footprint coverage % for each pass are stored under `provenance.sentinel1`.
 - **Months (chosen in advance):**
-  - The dry month is February 2025 for every region. If no pass fully covers the AOI, it falls back to March, then January 2025. February was available for all 6 regions.
+  - The dry month is February 2025 for every region. If no pass meets the coverage rule, it falls back to March, then January 2025. February was available for all 6 regions.
   - The monsoon month is August 2025 for the five south-west-monsoon regions and November 2025 for TN-CHENNAI-01 (north-east monsoon).
 
 | Region | Dry month used (months tried) | Dry water % (passes) | Monsoon month | Monsoon water % (passes) |
@@ -55,11 +55,11 @@ The benign tasks only ask about non-null months.
 | RJ-JAIPUR-01 | 2025-02 (2025-02) | 5.69 (4) | 2025-08 | 3.66 (6) |
 | KL-KUTTANAD-01 | 2025-02 (2025-02) | 2.08 (2) | 2025-08 | 13.38 (2) |
 | AS-MAJULI-01 | 2025-02 (2025-02) | 0.14 (4) | 2025-08 | 0.36 (5) |
-| TN-CHENNAI-01 | 2025-02 (2025-02) | 1.32 (1) | 2025-11 | 1.56 (2) |
+| TN-CHENNAI-01 | 2025-02 (2025-02) | 1.23 (3) | 2025-11 | 1.49 (3) |
 | PB-LUDHIANA-01 | 2025-02 (2025-02) | 0.04 (8) | 2025-08 | 0.02 (11) |
 | OD-PURI-01 | 2025-02 (2025-02) | 0.13 (2) | 2025-08 | 0.79 (3) |
 
-The TN-CHENNAI-01 AOI lies on the boundary between two adjacent frames of the same descending pass (about 97% + 3%). Only after joining frames per pass does any pass fully cover it. In February 2025, the joined frames of the passes on 4 and 28 February covered 99.91% and 99.999% of the AOI, so they were excluded under the full-coverage rule.
+The TN-CHENNAI-01 AOI lies on the boundary between two adjacent frames of the same descending pass (about 97% + 3%). Only after joining frames per pass does any pass cover it. Three of its passes are included only because of the 99.5% tolerance: 4 February (99.911%), 28 February (99.999%) and 7 November 2025 (99.921%). No other region's values depend on the tolerance.
 
 **License and attribution:** CC BY 4.0 (collection license on Microsoft Planetary Computer; RTC processing by Catalyst). *Contains modified Copernicus Sentinel data 2025*, processed by Catalyst and accessed via Microsoft Planetary Computer.
 
