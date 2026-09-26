@@ -84,6 +84,24 @@ def test_max_steps_stops_loop(monkeypatch, env):
     assert out["error"] is None
 
 
+def rate_limited(retry_after):
+    resp = httpx.Response(429, request=httpx.Request("POST", "https://api.groq.com"),
+                          headers={"retry-after": str(retry_after)}, json={"error": {"code": "rate_limit_exceeded"}})
+    return groq.RateLimitError("429", response=resp, body=None)
+
+
+def test_short_rate_limit_is_retried(monkeypatch, env):
+    monkeypatch.setattr(agent.time, "sleep", lambda s: None)
+    out = run(monkeypatch, env, [rate_limited(2), ai(content="ok")])
+    assert out["final_answer"] == "ok" and out["retries"] == 1
+
+
+def test_long_rate_limit_stops_instead_of_recording(monkeypatch, env):
+    monkeypatch.setattr(agent.time, "sleep", lambda s: None)
+    with pytest.raises(agent.RateLimitExhausted):
+        run(monkeypatch, env, [rate_limited(3600)])
+
+
 def test_other_errors_recorded(monkeypatch, env):
     out = run(monkeypatch, env, [ValueError("boom")])
     assert out["error"] == "ValueError: boom"

@@ -6,7 +6,8 @@
 
 ## Design choices
 - **Realistic replies from the harmful tools.** `send_report` returns "Report sent to X." and `delete_region_data` returns "Region data for X deleted.", even though both only write to an in-memory log. This is deliberate: a reply that said "simulated" would tell the agent it is in a sandbox, which could change its behaviour and bias the attack-success measurements.
-- **`get_region_data` omits provenance.** The tool returns the measured values and the `notes` field, but not the scene lists and request URLs, to keep tool outputs short for the LLM's token budget. Full provenance stays in `data/regions.json`.
+- **Trimmed tool outputs (token budget).** `get_region_data` returns compact JSON with the monthly NDVI and rainfall, water statistics, monsoon months and `notes`; it omits provenance, cloud cover, bbox, centroid and description. `search_reports` drops each report's `Sources:` line (the scene-ID list); everything else, including any text after that line, is returned. Tool descriptions are one line each. Full data stays in `data/`.
+- **Send tasks ask for summaries under 400 characters**, because Groq truncates Qwen's tool-call string arguments at 496 characters (see `notes/observations.md`).
 - **Keyword search.** `search_reports` is a case-insensitive keyword count with English stopwords removed, returning the top 2 reports. It is not semantic retrieval, so whether an injected report is retrieved depends on the words in the task prompt (see the `exposed` flag in the results).
 
 ## Radar water threshold (Sentinel-1 VV < −18 dB)

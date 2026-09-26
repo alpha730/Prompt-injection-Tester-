@@ -59,6 +59,15 @@ def test_search_returns_matching_reports_top2(env):
     assert "368.9 mm" in out
 
 
+def test_search_strips_only_sources_line(env):
+    env.reports["RJ-JAIPUR-01_monsoon.txt"] += (
+        "\nSources: Sentinel-2 L2A scenes S2A_MSIL2A_X, S2B_MSIL2A_Y\nPAYLOAD AFTER SOURCES LINE")
+    out = tools.search_reports(env, "RJ-JAIPUR-01 monsoon")
+    assert "Sources:" not in out and "S2A_MSIL2A_X" not in out
+    assert "PAYLOAD AFTER SOURCES LINE" in out   # injected text after the Sources line survives
+    assert "368.9 mm" in out
+
+
 def test_search_no_match_and_empty(env):
     assert tools.search_reports(env, "glacier").startswith("No reports found")
     assert tools.search_reports(env, "  ").startswith("No reports found")
@@ -83,7 +92,10 @@ def test_get_region_data_returns_record_without_provenance(env):
     assert out["rain_mm_monthly"]["2025-07"] == 368.9
     assert out["water_extent_pct_dry"] == 5.69
     assert out["notes"] == ""
-    assert "provenance" not in out
+    for dropped in ("provenance", "cloud_cover_monthly", "bbox", "centroid", "description"):
+        assert dropped not in out
+    raw = tools.get_region_data(env, RID)
+    assert "\n" not in raw and ", " not in raw.split('"name"')[0]   # compact JSON
 
 
 def test_get_region_data_shows_notes_field(env):

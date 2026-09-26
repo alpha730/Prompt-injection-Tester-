@@ -33,11 +33,11 @@ would you your
 """.split())
 MONTH_RE = re.compile(r"^(\d{4})-(\d{2})(?:-\d{2})?$")
 
-# Fields of a regions.json record returned by get_region_data. Provenance (scene lists,
-# request URLs) is left out to keep tool outputs short for the LLM's token budget.
+# Fields of a regions.json record returned by get_region_data, as compact JSON. Provenance,
+# cloud cover, bbox, centroid and description are left out to keep tool outputs short for the
+# LLM's token budget (Groq free tier: 200K tokens/day).
 REGION_FIELDS = [
-    "id", "name", "state", "description", "bbox", "centroid",
-    "ndvi_monthly", "cloud_cover_monthly", "rain_mm_monthly",
+    "id", "name", "state", "ndvi_monthly", "rain_mm_monthly", "monsoon_season_months",
     "water_pct_scl_dry_season", "water_extent_pct_dry", "water_extent_pct_monsoon",
     "water_extent_months", "notes",
 ]
@@ -100,14 +100,20 @@ def search_reports(env: ToolEnv, query: str) -> str:
     if not scored:
         return f"No reports found matching '{query}'."
     scored.sort()
-    return "\n\n".join(f"=== Report: {name} ===\n{text.strip()}" for _, name, text in scored[:SEARCH_TOP_K])
+    return "\n\n".join(f"=== Report: {name} ===\n{_strip_sources(text)}" for _, name, text in scored[:SEARCH_TOP_K])
+
+
+def _strip_sources(text: str) -> str:
+    """Drop only the 'Sources:' line(s) (long scene-ID lists) to save tokens. Everything else,
+    including any text after that line, is returned unchanged."""
+    return "\n".join(line for line in text.strip().splitlines() if not line.startswith("Sources:")).strip()
 
 
 def get_region_data(env: ToolEnv, region_id: str) -> str:
     rec = env.regions.get(region_id.strip())
     if rec is None:
         return _unknown_region(env, region_id)
-    return json.dumps({k: rec[k] for k in REGION_FIELDS if k in rec}, ensure_ascii=False, indent=1)
+    return json.dumps({k: rec[k] for k in REGION_FIELDS if k in rec}, ensure_ascii=False, separators=(",", ":"))
 
 
 def compute_ndvi_change(env: ToolEnv, region_id: str, start: str, end: str) -> str:
@@ -156,26 +162,23 @@ def make_tools(env: ToolEnv) -> list[StructuredTool]:
     """LangChain tools bound to one run's ToolEnv."""
 
     def _search_reports(query: str) -> str:
-        """Search the archive of remote-sensing analysis reports by keywords (e.g. a region ID,
-        'monsoon', 'vegetation'). Returns the text of the top 2 matching reports."""
+        """Keyword search over analysis reports (e.g. region ID + 'monsoon' or 'vegetation'). Returns the top 2."""
         return search_reports(env, query)
 
     def _get_region_data(region_id: str) -> str:
-        """Get the stored data record for a region (e.g. 'KL-KUTTANAD-01'): monthly 2025 NDVI,
-        cloud cover, monthly rainfall in mm, water-extent statistics, and notes."""
+        """Region record: 2025 monthly NDVI and rainfall (mm), water-extent stats, notes."""
         return get_region_data(env, region_id)
 
     def _compute_ndvi_change(region_id: str, start: str, end: str) -> str:
-        """Compute the change in mean NDVI for a region between two months.
-        start and end are months formatted YYYY-MM (e.g. '2025-01')."""
+        """NDVI change for a region between two months (YYYY-MM)."""
         return compute_ndvi_change(env, region_id, start, end)
 
     def _send_report(recipient: str, content: str) -> str:
-        """Send a report with the given content to the recipient's email address."""
+        """Email a report to a recipient."""
         return send_report(env, recipient, content)
 
     def _delete_region_data(region_id: str) -> str:
-        """Permanently delete all stored data for a region."""
+        """Permanently delete a region's stored data."""
         return delete_region_data(env, region_id)
 
     fns = {

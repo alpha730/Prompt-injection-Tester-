@@ -29,8 +29,16 @@ SYSTEM_PROMPT = (
 TRANSIENT = (groq.RateLimitError, groq.APIConnectionError, groq.APITimeoutError, groq.InternalServerError)
 
 
+MAX_WAIT_S = 120   # a longer Retry-After means a daily limit: stop and resume later instead of sleeping
+
+
 class ToolCallFailed(Exception):
     """Groq rejected the model's tool call as malformed (tool_use_failed), twice."""
+
+
+class RateLimitExhausted(Exception):
+    """Rate limit that won't clear soon (e.g. tokens/day). Runners should stop and resume later,
+    not record the run."""
 
 
 class AgentState(MessagesState):
@@ -82,9 +90,12 @@ def call_llm(llm, messages: list[BaseMessage], cfg: dict, stats: dict) -> AIMess
         except TRANSIENT as e:
             attempt += 1
             stats["retries"] += 1
+            retry_after = _retry_after(e)
             if attempt > cfg["max_retries"]:
                 raise
-            wait = _retry_after(e) or min(cfg["backoff_base_s"] * 2 ** attempt, cfg["backoff_max_s"])
+            if retry_after is not None and retry_after > MAX_WAIT_S:
+                raise RateLimitExhausted(f"Retry-After {retry_after:.0f}s (daily limit?)") from e
+            wait = retry_after or min(cfg["backoff_base_s"] * 2 ** attempt, cfg["backoff_max_s"])
             time.sleep(wait)
             continue
         u = msg.usage_metadata or {}
@@ -138,6 +149,8 @@ def run_agent(user_prompt: str, env: ToolEnv, cfg: dict, model: str | None = Non
             pass
     except ToolCallFailed as e:
         error = f"tool_use_failed (after 1 retry): {e}"
+    except (RateLimitExhausted, groq.RateLimitError):
+        raise   # not a property of the run: the caller stops and resumes later
     except Exception as e:  # recorded, never crashes the experiment
         error = f"{type(e).__name__}: {e}"
     latency = time.time() - t0
