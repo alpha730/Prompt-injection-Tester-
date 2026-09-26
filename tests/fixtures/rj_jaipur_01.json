@@ -1,0 +1,349 @@
+{
+  "id": "RJ-JAIPUR-01",
+  "name": "Chaksu farmland, south of Jaipur",
+  "state": "Rajasthan",
+  "description": "semi-arid rainfed/irrigated farmland",
+  "bbox": [
+    75.90488,
+    26.59754,
+    75.95512,
+    26.64246
+  ],
+  "centroid": [
+    75.93,
+    26.62
+  ],
+  "ndvi_monthly": {
+    "2025-01": 0.4211,
+    "2025-02": 0.4013,
+    "2025-03": 0.2415,
+    "2025-04": 0.206,
+    "2025-05": 0.2042,
+    "2025-06": 0.2291,
+    "2025-07": null,
+    "2025-08": 0.3399,
+    "2025-09": 0.3137,
+    "2025-10": 0.3024,
+    "2025-11": 0.3071,
+    "2025-12": 0.3739
+  },
+  "cloud_cover_monthly": {
+    "2025-01": 0.19,
+    "2025-02": 0.0,
+    "2025-03": 0.0,
+    "2025-04": 0.02,
+    "2025-05": 0.02,
+    "2025-06": 0.03,
+    "2025-07": 77.74,
+    "2025-08": 63.07,
+    "2025-09": 0.01,
+    "2025-10": 0.0,
+    "2025-11": 0.01,
+    "2025-12": 0.0
+  },
+  "valid_pixel_pct_monthly": {
+    "2025-01": 100.0,
+    "2025-02": 100.0,
+    "2025-03": 100.0,
+    "2025-04": 100.0,
+    "2025-05": 100.0,
+    "2025-06": 100.0,
+    "2025-07": 39.9,
+    "2025-08": 65.8,
+    "2025-09": 100.0,
+    "2025-10": 98.3,
+    "2025-11": 100.0,
+    "2025-12": 99.0
+  },
+  "water_pct_scl_monthly": {
+    "2025-01": 5.82,
+    "2025-02": 1.0,
+    "2025-03": 2.84,
+    "2025-04": 0.9,
+    "2025-05": 0.88,
+    "2025-06": 0.9,
+    "2025-07": null,
+    "2025-08": 6.51,
+    "2025-09": 0.95,
+    "2025-10": 4.13,
+    "2025-11": 2.32,
+    "2025-12": 5.06
+  },
+  "water_pct_scl_dry_season": 3.22,
+  "rain_mm_monthly": {
+    "2025-01": 29.0,
+    "2025-02": 11.4,
+    "2025-03": 0.4,
+    "2025-04": 2.0,
+    "2025-05": 3.3,
+    "2025-06": 84.9,
+    "2025-07": 368.9,
+    "2025-08": 210.5,
+    "2025-09": 69.8,
+    "2025-10": 47.1,
+    "2025-11": 0.4,
+    "2025-12": 0.0
+  },
+  "water_extent_pct_dry": 5.69,
+  "water_extent_pct_monsoon": 3.66,
+  "water_extent_months": {
+    "dry": "2025-02",
+    "monsoon": "2025-08"
+  },
+  "provenance": {
+    "sentinel2": {
+      "collection": "sentinel-2-l2a",
+      "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
+      "selection": "among scenes fully covering the AOI with eo:cloud_cover < 80, the one with the highest AOI valid-pixel %; month kept only if valid >= 50% (ties: lowest eo:cloud_cover, then earliest)",
+      "resolution_m": 20,
+      "masked_scl_classes": [
+        0,
+        1,
+        3,
+        8,
+        9,
+        10
+      ],
+      "scenes": {
+        "2025-01": {
+          "scene_id": "S2C_MSIL2A_20250128T053131_R105_T43REK_20250128T084454",
+          "acquired": "2025-01-28",
+          "cloud_cover": 0.19,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 4,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 5.82
+        },
+        "2025-02": {
+          "scene_id": "S2C_MSIL2A_20250217T052931_R105_T43REK_20250217T110511",
+          "acquired": "2025-02-17",
+          "cloud_cover": 0.0,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 4,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 1.0
+        },
+        "2025-03": {
+          "scene_id": "S2B_MSIL2A_20250324T052649_R105_T43REK_20250324T074123",
+          "acquired": "2025-03-24",
+          "cloud_cover": 0.0,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 7,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 2.84
+        },
+        "2025-04": {
+          "scene_id": "S2C_MSIL2A_20250428T052711_R105_T43REK_20250428T104014",
+          "acquired": "2025-04-28",
+          "cloud_cover": 0.02,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 7,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 0.9
+        },
+        "2025-05": {
+          "scene_id": "S2B_MSIL2A_20250523T052649_R105_T43REK_20250523T073847",
+          "acquired": "2025-05-23",
+          "cloud_cover": 0.02,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 8,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 0.88
+        },
+        "2025-06": {
+          "scene_id": "S2B_MSIL2A_20250612T052649_R105_T43REK_20250612T074052",
+          "acquired": "2025-06-12",
+          "cloud_cover": 0.03,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 5,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 0.9
+        },
+        "2025-07": {
+          "scene_id": "S2B_MSIL2A_20250702T052649_R105_T43REK_20250702T074318",
+          "acquired": "2025-07-02",
+          "cloud_cover": 77.74,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 2,
+          "valid_pixel_pct": 39.9,
+          "water_pct_scl": null,
+          "reason": "best of 2 scenes has only 39.9% valid AOI pixels (< 50%)"
+        },
+        "2025-08": {
+          "scene_id": "S2C_MSIL2A_20250826T052701_R105_T43REK_20250826T103729",
+          "acquired": "2025-08-26",
+          "cloud_cover": 63.07,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 3,
+          "valid_pixel_pct": 65.8,
+          "water_pct_scl": 6.51
+        },
+        "2025-09": {
+          "scene_id": "S2C_MSIL2A_20250925T052701_R105_T43REK_20250925T103607",
+          "acquired": "2025-09-25",
+          "cloud_cover": 0.01,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 5,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 0.95
+        },
+        "2025-10": {
+          "scene_id": "S2C_MSIL2A_20251025T052921_R105_T43REK_20251025T084612",
+          "acquired": "2025-10-25",
+          "cloud_cover": 0.0,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 6,
+          "valid_pixel_pct": 98.3,
+          "water_pct_scl": 4.13
+        },
+        "2025-11": {
+          "scene_id": "S2B_MSIL2A_20251109T052939_R105_T43REK_20251109T073727",
+          "acquired": "2025-11-09",
+          "cloud_cover": 0.01,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 7,
+          "valid_pixel_pct": 100.0,
+          "water_pct_scl": 2.32
+        },
+        "2025-12": {
+          "scene_id": "S2C_MSIL2A_20251204T053221_R105_T43REK_20251204T091915",
+          "acquired": "2025-12-04",
+          "cloud_cover": 0.0,
+          "processing_baseline": "05.11",
+          "reflectance_offset_applied": 1000.0,
+          "n_candidates": 7,
+          "valid_pixel_pct": 99.0,
+          "water_pct_scl": 5.06
+        }
+      }
+    },
+    "rainfall": {
+      "missing_days": {},
+      "request_url": "https://archive-api.open-meteo.com/v1/archive?latitude=26.62&longitude=75.93&start_date=2025-01-01&end_date=2025-12-31&daily=precipitation_sum&timezone=Asia%2FKolkata",
+      "response_meta": {
+        "latitude": 26.608084,
+        "longitude": 75.89404,
+        "elevation": 307.0,
+        "timezone": "Asia/Kolkata",
+        "daily_units": {
+          "time": "iso8601",
+          "precipitation_sum": "mm"
+        }
+      },
+      "model": "Open-Meteo archive default (best_match; ERA5 / ERA5-Land reanalysis)"
+    },
+    "fetched_at": "2026-09-26T18:17:42+00:00",
+    "sentinel1": {
+      "collection": "sentinel-1-rtc",
+      "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
+      "threshold_db": -18.0,
+      "polarisation": "VV",
+      "resolution_m": 20,
+      "value": "mean over all fully covering acquisitions in the month",
+      "dry": {
+        "month": "2025-02",
+        "water_extent_pct": 5.69,
+        "scenes": [
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250204T130307_20250204T130332_057747_071E86_rtc",
+            "acquired": "2025-02-04",
+            "orbit_direction": "ascending",
+            "relative_orbit": 100,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 5.54
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250207T005251_20250207T005316_057783_071FFC_rtc",
+            "acquired": "2025-02-07",
+            "orbit_direction": "descending",
+            "relative_orbit": 136,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 6.04
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250216T130307_20250216T130332_057922_072592_rtc",
+            "acquired": "2025-02-16",
+            "orbit_direction": "ascending",
+            "relative_orbit": 100,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 5.59
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250219T005250_20250219T005315_057958_072703_rtc",
+            "acquired": "2025-02-19",
+            "orbit_direction": "descending",
+            "relative_orbit": 136,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 5.59
+          }
+        ]
+      },
+      "monsoon": {
+        "month": "2025-08",
+        "water_extent_pct": 3.66,
+        "scenes": [
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250803T130304_20250803T130329_060372_rtc",
+            "acquired": "2025-08-03",
+            "orbit_direction": "ascending",
+            "relative_orbit": 100,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 3.19
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250806T005247_20250806T005312_060408_rtc",
+            "acquired": "2025-08-06",
+            "orbit_direction": "descending",
+            "relative_orbit": 136,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 3.95
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250815T130304_20250815T130329_060547_0787AB_rtc",
+            "acquired": "2025-08-15",
+            "orbit_direction": "ascending",
+            "relative_orbit": 100,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 3.78
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250818T005247_20250818T005312_060583_078917_rtc",
+            "acquired": "2025-08-18",
+            "orbit_direction": "descending",
+            "relative_orbit": 136,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 3.66
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250827T130304_20250827T130329_060722_078E90_rtc",
+            "acquired": "2025-08-27",
+            "orbit_direction": "ascending",
+            "relative_orbit": 100,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 4.16
+          },
+          {
+            "scene_id": "S1A_IW_GRDH_1SDV_20250830T005248_20250830T005313_060758_078FF8_rtc",
+            "acquired": "2025-08-30",
+            "orbit_direction": "descending",
+            "relative_orbit": 136,
+            "valid_pixel_pct": 100.0,
+            "water_extent_pct": 3.19
+          }
+        ]
+      }
+    }
+  },
+  "notes": ""
+}
