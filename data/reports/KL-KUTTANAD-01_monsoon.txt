@@ -1,0 +1,18 @@
+KL-KUTTANAD-01: Monsoon rainfall and water summary, 2025
+Region: Kuttanad paddy polders (Champakulam area), Kerala.
+
+Monsoon season for this region: June-September 2025.
+Monthly rainfall during the monsoon season:
+  - June 2025: 477.3 mm
+  - July 2025: 446.2 mm
+  - August 2025: 350.0 mm
+  - September 2025: 235.4 mm
+Monsoon-season total: 1508.9 mm, out of 3022.3 mm for all of 2025.
+The wettest month of 2025 was May 2025 (536.5 mm).
+
+Sentinel-1 radar (VV < -18 dB) detected open water over 2.08% of the area in February 2025 (dry season) and 13.38% in August 2025 (monsoon), a change of +11.30 percentage points.
+Sentinel-2 scene classification flagged 9.60% of cloud-free pixels as water in January-March 2025 (mean).
+
+Note: the radar threshold detects open water only; water under crops or vegetation is not counted.
+
+Sources: Open-Meteo Historical Weather API (daily precipitation_sum, https://archive-api.open-meteo.com/v1/archive?latitude=9.43&longitude=76.42&start_date=2025-01-01&end_date=2025-12-31&daily=precipitation_sum&timezone=Asia%2FKolkata); Sentinel-1 RTC scenes S1A_IW_GRDH_1SDV_20250209T004113_20250209T004138_057812_07211B_rtc, S1A_IW_GRDH_1SDV_20250221T004112_20250221T004137_057987_072837_rtc, S1A_IW_GRDH_1SDV_20250808T004109_20250808T004134_060437_rtc, S1A_IW_GRDH_1SDV_20250820T004109_20250820T004134_060612_078A40_rtc; Sentinel-2 L2A scenes S2B_MSIL2A_20250117T051039_R019_T43PFL_20250117T093134, S2B_MSIL2A_20250226T050659_R019_T43PFL_20250226T071341, S2B_MSIL2A_20250328T050659_R019_T43PFL_20250328T075231

@@ -1,0 +1,16 @@
+AS-MAJULI-01: Kharif season vegetation summary, 2025
+Region: Majuli island (Garamur area), Assam.
+
+Across 2025, mean NDVI was highest in September 2025 (0.7010) and lowest in March 2025 (0.3479).
+Kharif season (June-October 2025) monthly mean NDVI:
+  - June 2025: 0.4949
+  - July 2025: 0.6213
+  - August 2025: no data (no usable cloud-free Sentinel-2 scene)
+  - September 2025: 0.7010
+  - October 2025: 0.6935
+From June 2025 to October 2025, mean NDVI changed by +0.1986 (0.4949 to 0.6935).
+Cloud cover during the monsoon left 1 kharif month(s) without usable optical data.
+
+Method: monthly mean NDVI = (B08 - B04) / (B08 + B04) over cloud-free pixels (Sentinel-2 L2A scene classification mask), 20 m resolution.
+
+Sources: Sentinel-2 L2A scenes S2B_MSIL2A_20250303T041609_R090_T46RFQ_20250303T062557, S2B_MSIL2A_20250611T041549_R090_T46RFQ_20250611T062441, S2B_MSIL2A_20250711T041549_R090_T46RFQ_20250711T062513, S2A_MSIL2A_20250926T042221_R090_T46RFQ_20250926T070718, S2B_MSIL2A_20251019T041709_R090_T46RFQ_20251019T062730

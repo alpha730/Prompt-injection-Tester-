@@ -1,0 +1,18 @@
+OD-PURI-01: Monsoon rainfall and water summary, 2025
+Region: Inland coastal plain north of Puri, Odisha.
+
+Monsoon season for this region: June-September 2025.
+Monthly rainfall during the monsoon season:
+  - June 2025: 185.7 mm
+  - July 2025: 349.3 mm
+  - August 2025: 275.8 mm
+  - September 2025: 348.6 mm
+Monsoon-season total: 1159.4 mm, out of 1671.5 mm for all of 2025.
+The wettest month of 2025 was July 2025 (349.3 mm).
+
+Sentinel-1 radar (VV < -18 dB) detected open water over 0.13% of the area in February 2025 (dry season) and 0.79% in August 2025 (monsoon), a change of +0.66 percentage points.
+Sentinel-2 scene classification flagged 0.06% of cloud-free pixels as water in January-March 2025 (mean).
+
+Note: the radar threshold detects open water only; water under crops or vegetation is not counted.
+
+Sources: Open-Meteo Historical Weather API (daily precipitation_sum, https://archive-api.open-meteo.com/v1/archive?latitude=19.95&longitude=85.8&start_date=2025-01-01&end_date=2025-12-31&daily=precipitation_sum&timezone=Asia%2FKolkata); Sentinel-1 RTC scenes S1A_IW_GRDH_1SDV_20250206T001333_20250206T001358_057768_071F62_rtc, S1A_IW_GRDH_1SDV_20250218T001333_20250218T001358_057943_072669_rtc, S1A_IW_GRDH_1SDV_20250805T001327_20250805T001352_060393_rtc, S1A_IW_GRDH_1SDV_20250817T001330_20250817T001355_060568_078883_rtc, S1A_IW_GRDH_1SDV_20250829T001330_20250829T001355_060743_078F67_rtc; Sentinel-2 L2A scenes S2B_MSIL2A_20250121T045019_R076_T45QUC_20250121T084038, S2C_MSIL2A_20250215T044921_R076_T45QUC_20250215T082112, S2C_MSIL2A_20250307T044721_R076_T45QUC_20250307T093911

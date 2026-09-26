@@ -1,0 +1,16 @@
+OD-PURI-01: Kharif season vegetation summary, 2025
+Region: Inland coastal plain north of Puri, Odisha.
+
+Across 2025, mean NDVI was highest in September 2025 (0.7032) and lowest in December 2025 (0.4542).
+Kharif season (June-October 2025) monthly mean NDVI:
+  - June 2025: no data (no usable cloud-free Sentinel-2 scene)
+  - July 2025: no data (no usable cloud-free Sentinel-2 scene)
+  - August 2025: 0.4971
+  - September 2025: 0.7032
+  - October 2025: 0.6751
+From August 2025 to October 2025, mean NDVI changed by +0.1780 (0.4971 to 0.6751).
+Cloud cover during the monsoon left 2 kharif month(s) without usable optical data.
+
+Method: monthly mean NDVI = (B08 - B04) / (B08 + B04) over cloud-free pixels (Sentinel-2 L2A scene classification mask), 20 m resolution.
+
+Sources: Sentinel-2 L2A scenes S2B_MSIL2A_20250809T044659_R076_T45QUC_20250809T071145, S2B_MSIL2A_20250918T044659_R076_T45QUC_20250918T075013, S2B_MSIL2A_20251018T044719_R076_T45QUC_20251018T065516, S2C_MSIL2A_20251212T045221_R076_T45QUC_20251212T081316

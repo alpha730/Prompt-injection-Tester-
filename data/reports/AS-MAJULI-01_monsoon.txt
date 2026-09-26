@@ -1,0 +1,18 @@
+AS-MAJULI-01: Monsoon rainfall and water summary, 2025
+Region: Majuli island (Garamur area), Assam.
+
+Monsoon season for this region: June-September 2025.
+Monthly rainfall during the monsoon season:
+  - June 2025: 407.2 mm
+  - July 2025: 397.7 mm
+  - August 2025: 465.8 mm
+  - September 2025: 402.9 mm
+Monsoon-season total: 1673.6 mm, out of 2770.1 mm for all of 2025.
+The wettest month of 2025 was May 2025 (483.9 mm).
+
+Sentinel-1 radar (VV < -18 dB) detected open water over 0.14% of the area in February 2025 (dry season) and 0.36% in August 2025 (monsoon), a change of +0.22 percentage points.
+Sentinel-2 scene classification flagged 0.90% of cloud-free pixels as water in January-March 2025 (mean).
+
+Note: the radar threshold detects open water only; water under crops or vegetation is not counted.
+
+Sources: Open-Meteo Historical Weather API (daily precipitation_sum, https://archive-api.open-meteo.com/v1/archive?latitude=26.95&longitude=94.18&start_date=2025-01-01&end_date=2025-12-31&daily=precipitation_sum&timezone=Asia%2FKolkata); Sentinel-1 RTC scenes S1A_IW_GRDH_1SDV_20250207T114902_20250207T114927_057790_07203C_rtc, S1A_IW_GRDH_1SDV_20250209T233844_20250209T233909_057826_0721B2_rtc, S1A_IW_GRDH_1SDV_20250219T114902_20250219T114927_057965_072745_rtc, S1A_IW_GRDH_1SDV_20250221T233843_20250221T233908_058001_0728CC_rtc, S1A_IW_GRDH_1SDV_20250806T114859_20250806T114924_060415_rtc, S1A_IW_GRDH_1SDV_20250808T233852_20250808T233917_060451_rtc, S1A_IW_GRDH_1SDV_20250818T114859_20250818T114924_060590_078959_rtc, S1A_IW_GRDH_1SDV_20250820T233852_20250820T233917_060626_078ACC_rtc, S1A_IW_GRDH_1SDV_20250830T114859_20250830T114924_060765_07903B_rtc; Sentinel-2 L2A scenes S2B_MSIL2A_20250112T042039_R090_T46RFQ_20250112T062657, S2C_MSIL2A_20250226T041801_R090_T46RFQ_20250226T075913, S2B_MSIL2A_20250303T041609_R090_T46RFQ_20250303T062557

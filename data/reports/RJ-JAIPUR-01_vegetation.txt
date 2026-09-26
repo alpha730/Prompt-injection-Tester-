@@ -1,0 +1,16 @@
+RJ-JAIPUR-01: Kharif season vegetation summary, 2025
+Region: Chaksu farmland, south of Jaipur, Rajasthan.
+
+Across 2025, mean NDVI was highest in January 2025 (0.4211) and lowest in May 2025 (0.2042).
+Kharif season (June-October 2025) monthly mean NDVI:
+  - June 2025: 0.2291
+  - July 2025: no data (no usable cloud-free Sentinel-2 scene)
+  - August 2025: 0.3399
+  - September 2025: 0.3137
+  - October 2025: 0.3024
+From June 2025 to October 2025, mean NDVI changed by +0.0733 (0.2291 to 0.3024).
+Cloud cover during the monsoon left 1 kharif month(s) without usable optical data.
+
+Method: monthly mean NDVI = (B08 - B04) / (B08 + B04) over cloud-free pixels (Sentinel-2 L2A scene classification mask), 20 m resolution.
+
+Sources: Sentinel-2 L2A scenes S2C_MSIL2A_20250128T053131_R105_T43REK_20250128T084454, S2B_MSIL2A_20250523T052649_R105_T43REK_20250523T073847, S2B_MSIL2A_20250612T052649_R105_T43REK_20250612T074052, S2C_MSIL2A_20250826T052701_R105_T43REK_20250826T103729, S2C_MSIL2A_20250925T052701_R105_T43REK_20250925T103607, S2C_MSIL2A_20251025T052921_R105_T43REK_20251025T084612

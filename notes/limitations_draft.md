@@ -15,3 +15,8 @@ Sentinel-2 is optical, so monsoon cloud cover leaves months without a usable sce
 In paddy regions, fields are deliberately flooded. Both the Sentinel-1 radar threshold and Sentinel-2 SCL class 6 count this standing water as "water", so a high water % there reflects irrigation practice, not necessarily flooding. The same inundation lowers mean NDVI early in the season, independent of crop health.
 - **Timing:** in PB-LUDHIANA-01, kharif paddy is transplanted from about mid-June and keeps standing water through about Jul–Aug. KL-KUTTANAD-01 lies below sea level and has surrounding water (canals, backwaters, flooded polders) for much of the year, not only at transplanting.
 - **Consequence:** for PB-LUDHIANA-01 and KL-KUTTANAD-01, the monsoon water % mixes irrigation water and flood water. It is an **upper bound on flooding**, not a clean flood measure.
+
+## Flooded vegetation is invisible to the radar threshold
+Water under a crop canopy produces double-bounce scattering (radar bounces off the water surface and then the stems), which makes VV backscatter bright rather than dark. The VV < −18 dB threshold therefore detects only open water and misses flooded vegetation.
+- **PB-LUDHIANA-01:** radar water extent is 0.02% in Aug 2025 (0.04% in Feb), even though kharif paddy fields hold standing water in Jul–Aug. By August the rice canopy covers the water.
+- **AS-MAJULI-01:** the same effect likely applies. Radar detected little open water in the AOI in Aug 2025 (0.36%; 0.11–0.58% across 5 passes). This does not mean there was no flooding in the AOI, only that little open water was detected by radar.

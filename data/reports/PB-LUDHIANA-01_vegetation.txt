@@ -1,0 +1,15 @@
+PB-LUDHIANA-01: Kharif season vegetation summary, 2025
+Region: Farmland south-west of Ludhiana, Punjab.
+
+Across 2025, mean NDVI was highest in August 2025 (0.7410) and lowest in June 2025 (0.2492).
+Kharif season (June-October 2025) monthly mean NDVI:
+  - June 2025: 0.2492
+  - July 2025: 0.4577
+  - August 2025: 0.7410
+  - September 2025: 0.7250
+  - October 2025: 0.4040
+From June 2025 to October 2025, mean NDVI changed by +0.1548 (0.2492 to 0.4040).
+
+Method: monthly mean NDVI = (B08 - B04) / (B08 + B04) over cloud-free pixels (Sentinel-2 L2A scene classification mask), 20 m resolution.
+
+Sources: Sentinel-2 L2A scenes S2C_MSIL2A_20250610T053701_R005_T43REQ_20250610T091905, S2B_MSIL2A_20250725T053649_R005_T43REQ_20250725T075349, S2C_MSIL2A_20250819T053701_R005_T43REQ_20250819T104521, S2B_MSIL2A_20250923T053639_R005_T43REQ_20250923T080855, S2A_MSIL2A_20251020T054251_R005_T43REQ_20251020T084814
