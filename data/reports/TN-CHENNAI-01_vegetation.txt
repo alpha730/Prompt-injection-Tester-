@@ -1,8 +1,8 @@
-TN-CHENNAI-01: Kharif season vegetation summary, 2025
+TN-CHENNAI-01: Jun–Oct vegetation summary, 2025
 Region: Mudichur / Tambaram outskirts, Tamil Nadu.
 
 Across 2025, mean NDVI was highest in September 2025 (0.4872) and lowest in May 2025 (0.3453).
-Kharif season (June-October 2025) monthly mean NDVI:
+Monthly mean NDVI, June-October 2025:
   - June 2025: 0.3659
   - July 2025: 0.4088
   - August 2025: 0.4309

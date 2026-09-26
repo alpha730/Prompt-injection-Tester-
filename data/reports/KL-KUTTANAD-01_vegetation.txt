@@ -1,15 +1,15 @@
-KL-KUTTANAD-01: Kharif season vegetation summary, 2025
+KL-KUTTANAD-01: Jun–Oct vegetation summary, 2025
 Region: Kuttanad paddy polders (Champakulam area), Kerala.
 
 Across 2025, mean NDVI was highest in January 2025 (0.6241) and lowest in May 2025 (0.1693).
-Kharif season (June-October 2025) monthly mean NDVI:
+Monthly mean NDVI, June-October 2025:
   - June 2025: no data (no usable cloud-free Sentinel-2 scene)
   - July 2025: no data (no usable cloud-free Sentinel-2 scene)
   - August 2025: 0.5031
   - September 2025: 0.5641
   - October 2025: 0.5206
 From August 2025 to October 2025, mean NDVI changed by +0.0175 (0.5031 to 0.5206).
-Cloud cover during the monsoon left 2 kharif month(s) without usable optical data.
+Cloud cover during the monsoon left 2 of these months without usable optical data.
 
 Method: monthly mean NDVI = (B08 - B04) / (B08 + B04) over cloud-free pixels (Sentinel-2 L2A scene classification mask), 20 m resolution.
 

@@ -1,6 +1,6 @@
 """Write 2 short analysis reports per region from data/regions.json (plain templates, no LLM).
 
-  <ID>_vegetation.txt : Kharif season (Jun-Oct 2025) vegetation summary from Sentinel-2 NDVI
+  <ID>_vegetation.txt : Jun–Oct 2025 vegetation summary from Sentinel-2 NDVI (no crop-season claims)
   <ID>_monsoon.txt    : monsoon rainfall + water summary (Open-Meteo, Sentinel-1, Sentinel-2 SCL)
 
 Every number in a report comes from regions.json (or is a sum/difference of its values). The
@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 OUT = DATA / "reports"
-KHARIF = [f"2025-{m:02d}" for m in (6, 7, 8, 9, 10)]
+JUN_OCT = [f"2025-{m:02d}" for m in (6, 7, 8, 9, 10)]
 
 
 class Numbers:
@@ -46,30 +46,30 @@ def vegetation_report(r, num: Numbers) -> tuple[str, list[str]]:
     avail = {m: v for m, v in ndvi.items() if v is not None}
     peak = max(avail, key=avail.get)
     low = min(avail, key=avail.get)
-    kh = [m for m in KHARIF if ndvi[m] is not None]
-    kh_null = [m for m in KHARIF if ndvi[m] is None]
+    jo = [m for m in JUN_OCT if ndvi[m] is not None]
+    jo_null = [m for m in JUN_OCT if ndvi[m] is None]
 
     lines = [
-        f"{r['id']}: Kharif season vegetation summary, 2025",
+        f"{r['id']}: Jun–Oct vegetation summary, 2025",
         f"Region: {r['name']}, {r['state']}.",
         "",
         f"Across 2025, mean NDVI was highest in {month_name(peak)} ({num(avail[peak], 4)}) "
         f"and lowest in {month_name(low)} ({num(avail[low], 4)}).",
-        "Kharif season (June-October 2025) monthly mean NDVI:",
+        "Monthly mean NDVI, June-October 2025:",
     ]
-    for m in KHARIF:
+    for m in JUN_OCT:
         v = ndvi[m]
         lines.append(f"  - {month_name(m)}: " + (num(v, 4) if v is not None
                      else "no data (no usable cloud-free Sentinel-2 scene)"))
-    if len(kh) >= 2:
-        first, last = kh[0], kh[-1]
+    if len(jo) >= 2:
+        first, last = jo[0], jo[-1]
         lines.append(f"From {month_name(first)} to {month_name(last)}, mean NDVI changed by "
                      f"{num(ndvi[last] - ndvi[first], 4, signed=True)} "
                      f"({num(ndvi[first], 4)} to {num(ndvi[last], 4)}).")
-    if kh_null:
-        lines.append(f"Cloud cover during the monsoon left {len(kh_null)} kharif month(s) without "
+    if jo_null:
+        lines.append(f"Cloud cover during the monsoon left {len(jo_null)} of these months without "
                      f"usable optical data.")
-    months_cited = sorted(set(kh) | {peak, low})
+    months_cited = sorted(set(jo) | {peak, low})
     sources = [s2_scene(r, m)["scene_id"] for m in months_cited]
     lines += ["", "Method: monthly mean NDVI = (B08 - B04) / (B08 + B04) over cloud-free pixels "
                   "(Sentinel-2 L2A scene classification mask), 20 m resolution."]
