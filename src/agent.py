@@ -7,13 +7,24 @@ The `gate` node exists only under defense D2; D1 tags tool outputs in the `tools
 
 `run_agent` returns the final answer, the ordered tool calls, the full message trace, and
 per-run token usage. Groq errors are handled here:
-  - rate limits / transient errors: exponential backoff (honours Retry-After), up to max_retries
+  - 429 rate limits: every one is logged (message + retry-after / x-ratelimit-* headers) to
+    results/dev/ratelimit.log. A daily limit (tokens or requests per day) raises
+    RateLimitExhausted so the runner saves and stops. Any other 429 (per-minute limits) sleeps
+    Retry-After plus jitter and retries the same call; it is not a run error. Safety caps: more
+    than max_consecutive_rate_limit_waits waits in a row, or a Retry-After above
+    max_rate_limit_wait_s, also raise RateLimitExhausted.
+  - other transient errors (connection, timeout, 5xx): exponential backoff, up to max_retries
   - malformed tool call (400 `tool_use_failed`): retried once, then the run is recorded as an error
 """
 
 from __future__ import annotations
 
+import json
+import random
+import re
 import time
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 import groq
@@ -21,13 +32,16 @@ from langchain_core.messages import AIMessage, BaseMessage, SystemMessage, ToolM
 from langchain_groq import ChatGroq
 from langgraph.graph import END, START, MessagesState, StateGraph
 
+from src.config import ROOT
 from src.defenses import BLOCKED_MSG, DEFENSES, SYSTEM_PROMPT, Defense, gate_allows, tag
 from src.tools import ToolEnv, make_tools
 
 TRANSIENT = (groq.RateLimitError, groq.APIConnectionError, groq.APITimeoutError, groq.InternalServerError)
 
 
-MAX_WAIT_S = 120   # a longer Retry-After means a daily limit: stop and resume later instead of sleeping
+DAILY_RE = re.compile(r"per day|\(TPD\)|\(RPD\)|tokens_per_day|requests_per_day", re.I)
+RATE_LIMIT_DEFAULTS = {"max_consecutive_rate_limit_waits": 30, "max_rate_limit_wait_s": 900, "rate_limit_jitter_s": 5}
+_consecutive_waits = 0   # 429 waits in a row, across calls and runs; reset by any successful call
 
 
 class ToolCallFailed(Exception):
@@ -70,7 +84,59 @@ def _retry_after(e: Exception) -> float | None:
         return None
 
 
+def _ratelimit_log_path(cfg: dict) -> Path:
+    return Path(cfg["ratelimit_log"]) if cfg.get("ratelimit_log") else         ROOT / cfg.get("results_dir", "results") / "dev" / "ratelimit.log"
+
+
+def _rate_limit_info(e: Exception) -> dict:
+    resp = getattr(e, "response", None)
+    headers = {k.lower(): v for k, v in resp.headers.items()} if resp is not None else {}
+    try:
+        body = resp.json() if resp is not None else None
+    except Exception:
+        body = getattr(e, "body", None)
+    text = str(e) + " " + json.dumps(body, default=str)
+    return {"message": str(e), "body": body,
+            "headers": {k: v for k, v in headers.items() if k == "retry-after" or k.startswith("x-ratelimit")},
+            "daily": bool(DAILY_RE.search(text))}
+
+
+def _log_rate_limit(cfg: dict, info: dict, action: str, wait_s: float | None):
+    path = _ratelimit_log_path(cfg)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rec = {"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "action": action,
+           "wait_s": wait_s, "consecutive_waits": _consecutive_waits, **info}
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(rec, ensure_ascii=False, default=str) + "\n")
+
+
+def _handle_rate_limit(e: Exception, cfg: dict, stats: dict):
+    """Sleep through a per-minute 429, or raise RateLimitExhausted (daily limit or safety cap)."""
+    global _consecutive_waits
+    c = {**RATE_LIMIT_DEFAULTS, **cfg}
+    info = _rate_limit_info(e)
+    retry_after = _retry_after(e)
+    if info["daily"]:
+        _log_rate_limit(cfg, info, "stop: daily limit", None)
+        raise RateLimitExhausted(f"daily limit: {info['message'][:200]}") from e
+    if retry_after is not None and retry_after > c["max_rate_limit_wait_s"]:
+        _log_rate_limit(cfg, info, "stop: retry-after above max_rate_limit_wait_s", None)
+        raise RateLimitExhausted(f"Retry-After {retry_after:.0f}s > {c['max_rate_limit_wait_s']}s") from e
+    if _consecutive_waits >= c["max_consecutive_rate_limit_waits"]:
+        _log_rate_limit(cfg, info, "stop: too many consecutive waits", None)
+        raise RateLimitExhausted(f"{_consecutive_waits} consecutive rate-limit waits") from e
+    base = retry_after if retry_after is not None else min(cfg["backoff_base_s"] * 2 ** (_consecutive_waits + 1),
+                                                           cfg["backoff_max_s"])
+    wait = base + random.uniform(1, c["rate_limit_jitter_s"]) if c["rate_limit_jitter_s"] else base
+    _consecutive_waits += 1
+    stats["rate_limit_waits"] += 1
+    stats["rate_limit_wait_s"] += wait
+    _log_rate_limit(cfg, info, "wait and retry", round(wait, 1))
+    time.sleep(wait)
+
+
 def call_llm(llm, messages: list[BaseMessage], cfg: dict, stats: dict) -> AIMessage:
+    global _consecutive_waits
     tool_use_failures = 0
     attempt = 0
     while True:
@@ -85,17 +151,18 @@ def call_llm(llm, messages: list[BaseMessage], cfg: dict, stats: dict) -> AIMess
             if tool_use_failures > 1:
                 raise ToolCallFailed(str(e)) from e
             continue
+        except groq.RateLimitError as e:
+            _handle_rate_limit(e, cfg, stats)
+            continue
         except TRANSIENT as e:
             attempt += 1
             stats["retries"] += 1
-            retry_after = _retry_after(e)
             if attempt > cfg["max_retries"]:
                 raise
-            if retry_after is not None and retry_after > MAX_WAIT_S:
-                raise RateLimitExhausted(f"Retry-After {retry_after:.0f}s (daily limit?)") from e
-            wait = retry_after or min(cfg["backoff_base_s"] * 2 ** attempt, cfg["backoff_max_s"])
+            wait = _retry_after(e) or min(cfg["backoff_base_s"] * 2 ** attempt, cfg["backoff_max_s"])
             time.sleep(wait)
             continue
+        _consecutive_waits = 0
         u = msg.usage_metadata or {}
         stats["calls"].append({"input_tokens": u.get("input_tokens", 0), "output_tokens": u.get("output_tokens", 0)})
         return msg
@@ -169,7 +236,8 @@ def serialize(m: BaseMessage) -> dict:
 
 def run_agent(user_prompt: str, env: ToolEnv, cfg: dict, model: str | None = None,
               defense: str = "D0") -> dict:
-    stats = {"calls": [], "retries": 0, "tool_use_failed": 0, "blocked": []}
+    stats = {"calls": [], "retries": 0, "tool_use_failed": 0, "blocked": [],
+             "rate_limit_waits": 0, "rate_limit_wait_s": 0.0}
     graph = build_graph(make_llm(cfg, model), make_tools(env), cfg, stats, DEFENSES[defense], user_prompt)
     state: dict = {"messages": [], "steps": 0}
     error = None
@@ -199,6 +267,8 @@ def run_agent(user_prompt: str, env: ToolEnv, cfg: dict, model: str | None = Non
         "output_tokens": sum(c["output_tokens"] for c in stats["calls"]),
         "tokens_per_call": stats["calls"],
         "retries": stats["retries"],
+        "rate_limit_waits": stats["rate_limit_waits"],
+        "rate_limit_wait_s": round(stats["rate_limit_wait_s"], 1),
         "tool_use_failed": stats["tool_use_failed"],
         "blocked_calls": stats["blocked"],
         "outbox": list(env.outbox),

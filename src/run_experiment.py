@@ -12,9 +12,10 @@ Within an attacked block, runs go in rounds of 20 (one per task); round k gives 
 style/placement combo (i + k) mod 10. After every round each task has run once and each
 combo twice, so any prefix is balanced across tasks, styles and placements.
 
-Resumable: runs already in results/raw_runs.jsonl are skipped. On a rate limit that won't
-clear soon (e.g. tokens/day), progress is saved, a per-block summary is printed, and the
-runner exits with code 3. Rerun the same command the next day to continue.
+Resumable: runs already in results/raw_runs.jsonl are skipped. Per-minute rate limits are slept
+through inside the agent (src/agent.py). On a daily limit, or a safety cap (too many rate-limit
+waits in a row, or max_session_hours reached), progress is saved, a per-block summary is printed,
+and the runner exits with code 3. Rerun the same command later to continue.
 
   python -m src.run_experiment            # full grid
   python -m src.run_experiment --quick    # 5 tasks x 2 attacks x 2 placements x D0 -> results/quick_runs.jsonl
@@ -102,6 +103,8 @@ def execute(spec: dict, base: ToolEnv, cfg: dict) -> dict:
         "output_tokens": out["output_tokens"],
         "tokens_per_call": out["tokens_per_call"],
         "retries": out["retries"],
+        "rate_limit_waits": out["rate_limit_waits"],
+        "rate_limit_wait_s": out["rate_limit_wait_s"],
         "tool_use_failed": out["tool_use_failed"],
         "latency": out["latency_s"],
         "error": out["error"],
@@ -174,6 +177,12 @@ def main(argv=None) -> int:
     t0 = time.time()
     with out_path.open("a", encoding="utf-8") as f:
         for spec in tqdm(todo, unit="run"):
+            hours = (time.time() - t0) / 3600
+            if hours >= cfg.get("max_session_hours", 12):
+                tqdm.write(f"\nStopped before {run_key(spec)}: session reached max_session_hours "
+                           f"({cfg.get('max_session_hours', 12)} h); rerun the same command to resume.")
+                status = 3
+                break
             try:
                 row = execute(spec, base, cfg)
             except (RateLimitExhausted, groq.RateLimitError) as e:

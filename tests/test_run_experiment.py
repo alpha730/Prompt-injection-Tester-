@@ -65,3 +65,14 @@ def test_resume_skips_done_and_stops_on_rate_limit(tmp_path, monkeypatch):
     keys = [json.loads(l)["run_key"] for l in out.read_text(encoding="utf-8").splitlines()]
     assert len(keys) == 8 and len(set(keys)) == 8   # 5 + 3 new, no duplicates
     assert keys == [rx.run_key(s) for s in rx.plan_runs(cfg)[:8]]
+
+
+def test_session_length_cap_stops_cleanly(tmp_path, monkeypatch):
+    cfg = {**CFG, "results_dir": str(tmp_path), "max_session_hours": 1}
+    monkeypatch.setattr(rx, "load_config", lambda: cfg)
+    monkeypatch.setattr(rx, "ROOT", tmp_path.parent)
+    monkeypatch.setattr(rx, "execute", fake_execute)
+    clock = iter([0.0] + [0.0, 1800.0, 3700.0] + [3700.0] * 10)   # t0, then one reading per run
+    monkeypatch.setattr(rx.time, "time", lambda: next(clock))
+    assert rx.main([]) == 3
+    assert len((tmp_path / "raw_runs.jsonl").read_text(encoding="utf-8").splitlines()) == 2

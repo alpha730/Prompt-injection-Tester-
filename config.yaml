@@ -18,6 +18,11 @@ delay_between_calls_s: 2.0
 max_retries: 6
 backoff_base_s: 2.0
 backoff_max_s: 60.0
+# 429 handling (src/agent.py): daily limits stop the run; per-minute limits sleep Retry-After + jitter.
+max_consecutive_rate_limit_waits: 30   # stop cleanly after this many 429 waits in a row
+max_rate_limit_wait_s: 900             # stop if Retry-After is longer than this
+rate_limit_jitter_s: 5                 # extra 1..N s added to each wait
+max_session_hours: 12                  # runner stops cleanly (before the next run) after this long
 
 # --- Experiment grid ---
 n_repeats: 1
