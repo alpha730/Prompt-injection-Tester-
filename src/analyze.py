@@ -205,8 +205,8 @@ def breakdown_md(bd: list[dict], dimension: str) -> str:
 
 
 def small_n_note(summary: list[dict]) -> str:
-    return (f"All rates are k/n. With n below about {SMALL_N} per cell, differences of several "
-            "percentage points are within noise; no significance tests are reported.")
+    return (f"All rates are k/n. With n below about {SMALL_N} per cell, small differences "
+            "between cells may be noise; no significance tests are reported.")
 
 
 def write_csv(path: Path, rows: list[dict]):
